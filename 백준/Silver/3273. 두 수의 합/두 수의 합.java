@@ -1,40 +1,37 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
         int n = Integer.parseInt(br.readLine());
-        int[] numbers = new int[n];
+
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] a = new int[n];
         for (int i = 0; i < n; i++) {
-            numbers[i] = Integer.parseInt(st.nextToken());
+            a[i] = Integer.parseInt(st.nextToken());
         }
+
         int x = Integer.parseInt(br.readLine());
 
-        Arrays.sort(numbers);
+        Arrays.sort(a);
 
-        int cnt = 0;
-        int l = 0, r = n - 1;
-        while (l < r) {
-            int sum = numbers[l] + numbers[r];
-            if (sum == x) {
+        int left = 0, right = n - 1, cnt = 0;
+        while (left < right) {
+            if (a[left] + a[right] == x) {
                 cnt++;
-            }
-
-            if (sum < x) {
-                l++;
+                left++;
+                right--;
+            } else if (a[left] + a[right] < x) {
+                left++;
             } else {
-                r--;
+                right--;
             }
         }
 
-        bw.write(String.valueOf(cnt));
-        bw.flush();
-        bw.close();
+        System.out.println(cnt);
+
     }
 
 }
