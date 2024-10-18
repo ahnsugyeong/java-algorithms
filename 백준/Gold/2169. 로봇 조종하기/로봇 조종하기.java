@@ -35,13 +35,13 @@ public class Main {
             // 값이 덮어씌워지지 않게 tmp 배열 사용
             int[][] tmp = new int[2][M];
 
-            // 왼쪽 + 위쪽 (탐색 순서가 일정하기 때문에 덮어쓰여도 올바른 값 유지)
+            // 왼쪽 + 위쪽
             tmp[0][0] = dp[i - 1][0] + mars[i][0];
             for (int j = 1; j < M; j++) {
                 tmp[0][j] = Math.max(tmp[0][j - 1], dp[i - 1][j]) + mars[i][j];
             }
 
-            // 오른쪽
+            // 오른쪽 + 위쪽
             tmp[1][M - 1] = dp[i - 1][M - 1] + mars[i][M - 1];
             for (int j = M - 2; j >= 0; j--) {
                 tmp[1][j] = Math.max(tmp[1][j + 1], dp[i - 1][j]) + mars[i][j];
